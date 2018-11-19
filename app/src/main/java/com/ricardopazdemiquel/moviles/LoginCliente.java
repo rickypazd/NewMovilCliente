@@ -236,7 +236,7 @@ public class LoginCliente extends AppCompatActivity {
             super.onPostExecute(success);
             mAuthTask = null;
             showProgress(false);
-            if(success  ==null){
+            if(success  == null){
                 Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
                 if(success.equals("falso")){

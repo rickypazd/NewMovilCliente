@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ricardopazdemiquel.moviles.Favoritos_Clientes">
+    tools:context=".Favoritos_Clientes">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar3"
