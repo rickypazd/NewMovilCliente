@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ricardopazdemiquel.moviles.PedirSieteMap">
+
+    <LinearLayout
+        android:id="@+id/cargando"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroundcolor2"
+        android:orientation="vertical"
+        android:translationZ="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/backgroundcolor2"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="0dp"></android.support.v7.widget.Toolbar>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <FrameLayout
+                android:id="@+id/mapaLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapviewPedirSiete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/ivmarker"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_icono_market" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:translationZ="999dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutPedir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:background="@drawable/backgroundcolor2"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:drawableStart="@drawable/ic_icon_pointer_map"
+                            android:drawablePadding="10dp"
+                            android:hint="Dirección inicial"
+                            android:inputType="text"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textSize="12sp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:drawableStart="@drawable/ic_icon_pointer_map2"
+                            android:drawablePadding="10dp"
+                            android:hint="Dirección final"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <android.support.design.widget.CoordinatorLayout
+                        android:id="@+id/Container_verPerfil"
+                        android:translationZ="99999dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/button_sheetss"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorWhite"
+                            android:orientation="vertical"
+                            app:behavior_hideable="true"
+                            app:behavior_peekHeight="50dp"
+                            app:layout_behavior="utiles.BehaviorCuston">
+
+                            <FrameLayout
+                                android:id="@+id/contenedorFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"></FrameLayout>
+
+                            <Button
+                                android:id="@+id/btn_elegir_destino"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_margin="0dp"
+                                android:background="#9A50EF"
+                                android:padding="0dp"
+                                android:text="Elegir destino en el mapa"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorWhite" />
+                        </LinearLayout>
+
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/verlisto"
+                    android:layout_width="0dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="152dp"
+                    android:layout_marginEnd="90dp"
+                    android:layout_marginStart="90dp"
+                    android:background="@drawable/ic_button_border_white"
+                    android:text="Listo"
+                    android:textAllCaps="false"
+                    android:textColor="#9A50EF"
+                    android:textSize="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_pedir_super"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="51dp"
+                    android:layout_marginEnd="80dp"
+                    android:layout_marginStart="80dp"
+                    android:background="@drawable/ic_icon_super_siete"
+                    android:drawableLeft="@drawable/logoestandar"
+                    android:text="Pedir super siete"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_pedir_maravilla"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="51dp"
+                    android:layout_marginEnd="80dp"
+                    android:layout_marginStart="80dp"
+                    android:background="@drawable/ic_icon_siete_maravilla"
+                    android:drawableLeft="@drawable/logoestandar"
+                    android:text="Pedir siete maravilla"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/reciclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="51dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/layoutDots"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minHeight="10dp"
+                        android:orientation="horizontal" />
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <!--<android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/reciclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </android.support.v7.widget.RecyclerView>-->
+
+            </android.support.constraint.ConstraintLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

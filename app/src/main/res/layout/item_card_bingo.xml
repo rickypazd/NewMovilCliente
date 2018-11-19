@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyt_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="@dimen/spacing_middle"
+        app:cardCornerRadius="3dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#E8EAF6"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="bingo"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/pos1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:background="@drawable/ic_button_border_black"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/pos6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:background="@drawable/ic_button_border_black"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/pos11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/pos14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos15"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/pos16"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos17"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos18"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/pos19"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos20"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/pos21"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos22"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos23"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/pos24"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/pos25"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:background="@drawable/ic_button_border_black"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
