@@ -227,15 +227,20 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        /*if (mMapView != null && mMapView.findViewById(Integer.parseInt("1")) != null) {
+        /*   if (mMapView != null &&
+                mMapView.findViewById(Integer.parseInt("1")) != null) {
             ImageView locationButton = (ImageView) ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 0, 150, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+            layoutParams.setMargins(0, 0, 30, height/4);
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
-
         }*/
        /* mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
