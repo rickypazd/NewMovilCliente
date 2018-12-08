@@ -82,14 +82,13 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private CoordinatorLayout Container_verPerfil;
     private BottomSheetBehavior bottomSheetBehavior;
     private TextView text_nombreConductor;
-    private ImageView img_foto;
+    private com.mikhaellopez.circularimageview.CircularImageView img_foto;
     private TextView text_nombreAuto;
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
 
     private TextView cont_amable, cont_buena_ruta, cont_auto_limpio, text_ultimo_mensaje;
-
 
     private Button btn_enviar_mensaje;
     private Button btn_llamar;

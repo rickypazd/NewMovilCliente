@@ -116,7 +116,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private LinearLayout linear_confirm;
     private LinearLayout linearLayoutPedir;
     private LinearLayout linearLayoutTogo;
-    private LinearLayout linearLayoutcarga;
     private ConstraintLayout layoutButon;
     private ConstraintLayout btn_estandar_recicler;
     private LatLng inicio;
@@ -178,7 +177,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         ll_ubic = findViewById(R.id.linearLayoutPedir);
 
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
-        linearLayoutcarga=findViewById(R.id.cargando);
         iv_marker = findViewById(R.id.ivmarker);
         //esto es prueba
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
@@ -316,7 +314,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         if (!entroLocation) {
                             if(selected!=mAutocompleteTextView2){
                                 entroLocation = true;
-                                linearLayoutcarga.setVisibility(View.GONE);
                                 selected.setTag(new LatLng(location.getLatitude(), location.getLongitude()));
                                 mMap.clear();
                                 selected.setText(getCompleteAddressString(location.getLatitude(), location.getLongitude()));
@@ -1099,18 +1096,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             switch (tipo) {
             case 1:
                 recyclerView.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
-                toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
-                toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 4:
                 btn_pedir_super.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
-                toolbar.setTitleTextColor(Color.WHITE);
                 break;
         }
     }

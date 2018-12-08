@@ -103,7 +103,7 @@
                                     android:layout_weight="1"
                                     android:gravity="center">
 
-                                    <ImageView
+                                    <com.mikhaellopez.circularimageview.CircularImageView
                                         android:id="@+id/img_foto"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"

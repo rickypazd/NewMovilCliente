@@ -89,7 +89,7 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     private TextView text_nombreAuto;
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
-    private ImageView img_foto;
+    private com.mikhaellopez.circularimageview.CircularImageView img_foto;
     private TextView cont_amable, cont_buena_ruta, cont_auto_limpio, text_ultimo_mensaje;
     private Button btn_cancelar_viaje;
     JSONObject Json_cancelarViaje;
