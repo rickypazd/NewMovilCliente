@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -86,10 +87,13 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     private TextView text_nombreAuto;
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
+    private ImageView img_foto;
+    private TextView cont_amable, cont_buena_ruta, cont_auto_limpio, text_ultimo_mensaje;
     private Button btn_cancelar_viaje;
     JSONObject Json_cancelarViaje;
     private ListView lista_productos;
     private TextView tv_cantidad;
+    private JSONObject usr_log;
 //    private LinearLayout perfil_condutor;
 private Button btn_enviar_mensaje;
     private Button btn_llamar;
@@ -121,6 +125,12 @@ private Button btn_enviar_mensaje;
         btn_cancelar_viaje.setOnClickListener(this);
         lista_productos=findViewById(R.id.lista_productos);
         tv_cantidad=findViewById(R.id.tv_cantidad);
+        img_foto = findViewById(R.id.img_foto);
+        cont_amable = findViewById(R.id.cont_amable);
+        cont_buena_ruta = findViewById(R.id.cont_buena_ruta);
+        cont_auto_limpio = findViewById(R.id.cont_auto_limpio);
+        text_ultimo_mensaje = findViewById(R.id.text_ultimo_mensaje);
+
         View v =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(v);
         bottomSheetBehavior.setHideable(false);
@@ -141,13 +151,14 @@ private Button btn_enviar_mensaje;
             }
         });
 
-       // JSONArray arr = getProductosPendientes();
+        usr_log = getUsr_log();
+
+        // JSONArray arr = getProductosPendientes();
        /* if(arr!=null){
             Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(Inicio_viaje_togo.this,arr);
             lista_productos.setAdapter(adapter);
             tv_cantidad.setText("Productos ("+arr.length()+")");
         }*/
-
 
         try {
             json_carrera = new JSONObject(getIntent().getStringExtra("obj_carrera"));
@@ -711,12 +722,12 @@ private Button btn_enviar_mensaje;
     public class Get_ObtenerPerfilConductor extends AsyncTask<Void, String, String> {
         private String id;
 
-        public Get_ObtenerPerfilConductor(String id){
-            this.id=id;
+        public Get_ObtenerPerfilConductor(String id) {
+            this.id = id;
         }
+
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
@@ -724,77 +735,102 @@ private Button btn_enviar_mensaje;
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_info_con_carrera");
-            parametros.put("id_carrera",id);
+            parametros.put("id_carrera", id);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
             return respuesta;
         }
+
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             try {
-                final JSONObject object = new JSONObject(resp);
-                if(resp == null){
-                    Toast.makeText(Inicio_viaje_togo.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                if (resp == null) {
+                    Toast.makeText(Inicio_viaje_togo.this, "Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                     Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-                }else if(object != null){
-                    final String nombreConductor = object.getString("nombre").toString();
-                    final String apellido_pa = object.getString("apellido_pa").toString();
-                    final String apellido_ma = object.getString("apellido_ma").toString();
-                    String modelo = object.getString("modelo").toString();
-                    String marca =  object.getString("marca").toString();
-                    int viajes = object.getInt("cant_car");
-                    String placa = object.getString("placa");
-                    text_nombreConductor.setText(nombreConductor +" "+apellido_pa+ " " +apellido_ma);
-                    text_nombreAuto.setText(marca + "-" +modelo);
-                    text_numeroPlaca.setText(placa);
-                    text_Viajes.setText("ha completado: " + viajes);
-                    Container_verPerfil.setVisibility(View.VISIBLE);
-                    btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(Inicio_viaje_togo.this,Chat_Activity.class);
-                            try {
-                                intent.putExtra("id_receptor",object.getString("id"));
-                                intent.putExtra("nombre_receptor",nombreConductor+" "+apellido_pa+" "+apellido_ma);
-                                intent.putExtra("id_emisor",getUsr_log().getString("id"));
-                                intent.putExtra("foto_perfil", object.getString("foto_perfil"));
-                                startActivity(intent);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    btn_llamar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                String telefono = object.getString("telefono");
-                                number=telefono;
+                }
+                if (!resp.isEmpty()) {
+                    final JSONObject object = new JSONObject(resp);
+                    if (object != null) {
+                        final String nombreConductor = object.getString("nombre").toString();
+                        final String apellido_pa = object.getString("apellido_pa").toString();
+                        final String apellido_ma = object.getString("apellido_ma").toString();
+                        String modelo = object.getString("modelo").toString();
+                        String marca = object.getString("marca").toString();
+                        int viajes = object.getInt("cant_car");
 
-                                int permissionCheck = ContextCompat.checkSelfPermission(
-                                        Inicio_viaje_togo.this, Manifest.permission.CALL_PHONE);
-                                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                                    Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
-                                    ActivityCompat.requestPermissions(Inicio_viaje_togo.this, new String[]{Manifest.permission.CALL_PHONE}, 225);
-                                } else {
-                                    callPhone();
+                        int amable = object.getInt("amable");
+                        int buena_ruta = object.getInt("buena_ruta");
+                        int auto_limpio = object.getInt("auto_limpio");
+                        String ultimo_mensaje = object.getString("ultimo_mensaje");
+
+                        String placa = object.getString("placa");
+                        text_nombreConductor.setText(nombreConductor + " " + apellido_pa + " " + apellido_ma);
+                        text_nombreAuto.setText(marca + "-" + modelo);
+                        text_numeroPlaca.setText(placa);
+
+                        cont_amable.setText(amable + "");
+                        cont_buena_ruta.setText(buena_ruta + "");
+                        cont_auto_limpio.setText(auto_limpio + "");
+                        text_ultimo_mensaje.setText(ultimo_mensaje+"");
+
+                        text_Viajes.setText("ha completado: " + viajes);
+
+                        Container_verPerfil.setVisibility(View.VISIBLE);
+                        btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Inicio_viaje_togo.this, Chat_Activity.class);
+                                try {
+                                    intent.putExtra("id_receptor", object.getString("id"));
+                                    intent.putExtra("nombre_receptor", nombreConductor + " " + apellido_pa + " " + apellido_ma);
+                                    intent.putExtra("id_emisor", usr_log.getString("id"));
+                                    intent.putExtra("foto_perfil", object.getString("foto_perfil"));
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
+                        });
+                        btn_llamar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    String telefono = object.getString("telefono");
+
+                                    number = telefono;
+
+                                    int permissionCheck = ContextCompat.checkSelfPermission(
+                                            Inicio_viaje_togo.this, Manifest.permission.CALL_PHONE);
+                                    if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                                        Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
+                                        ActivityCompat.requestPermissions(Inicio_viaje_togo.this, new String[]{Manifest.permission.CALL_PHONE}, 225);
+                                    } else {
+                                        callPhone();
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                    if (object.has("foto_perfil")) {
+                        if (object.getString("foto_perfil").length() > 0) {
+                            new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto) + object.getString("foto_perfil"));
                         }
-                    });
+                    }
+                } else {
+                    Toast.makeText(Inicio_viaje_togo.this, "Error al obtener Datos", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
+
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
         }
     }
 
@@ -1009,6 +1045,32 @@ private Button btn_enviar_mensaje;
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             progreso.setMessage(values[0]);
+        }
+    }
+
+    public class AsyncTaskLoadImage extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                bitmap = BitmapFactory.decodeStream((InputStream) url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
         }
     }
 

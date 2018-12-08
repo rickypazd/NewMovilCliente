@@ -387,7 +387,7 @@
                                     android:background="@drawable/rounded_corner"
                                     android:padding="10dp"
                                     android:inputType="textMultiLine"
-                                    android:text="Tuve un excelente servicio"
+                                    android:text=""
                                     android:textColor="@color/colorBlack" />
 
 

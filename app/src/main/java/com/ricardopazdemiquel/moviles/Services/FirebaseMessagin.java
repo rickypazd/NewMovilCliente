@@ -78,7 +78,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
                 .setContentText("Tu viaje ha finalizado.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -98,7 +98,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
                 .setContentTitle("Siete")
                 .setContentText("Tu viaje está en curso." +
                         "Que tengas un buen viaje.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -115,7 +115,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
                 .setContentText("Tu Siete ya llegó.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -140,7 +140,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
                 .setContentText("Tu Siete está cerca.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -176,7 +176,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
                 .setContentText("El conductor canceló el viaje. Disculpa las molestias.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -193,7 +193,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
                 .setContentText("Ya compramos tu pedido.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_logosiete_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -212,7 +212,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                     .setContentTitle("Siete")
                     .setContentText("Se agregó \""+obj.getString("nombre")+"\" como costo extra, con un valor de Bs. "+obj.getString("costo")+".")
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_logosiete_foreground)
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -230,7 +230,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                     .setContentTitle("Siete")
                     .setContentText("Se eliminó \""+obj.getString("nombre")+"\" de tus costos extras.")
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_logosiete_foreground)
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -280,7 +280,8 @@ public class FirebaseMessagin extends FirebaseMessagingService
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                     .setContentTitle("Siete: Nuevo mensaje.")
                     .setContentText(obj.getString("mensaje"))
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_logosiete_foreground
+                    )
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
