@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ricardopazdemiquel.moviles.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -69,6 +70,7 @@ public class LoginSocial extends AppCompatActivity {
     private ViewPager viewPager;
     private Button btnNext;
     private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
     private MyViewPagerAdapter myViewPagerAdapter;
     private String about_title_array[] = {
             "7 Estándar",
@@ -153,6 +155,7 @@ public class LoginSocial extends AppCompatActivity {
         // Set the dimensions of the sign-in button.
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id_google))
                 .requestEmail()
                 .build();
         // [END configure_signin]
@@ -161,7 +164,7 @@ public class LoginSocial extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         // [END build_client]
-
+        mAuth = FirebaseAuth.getInstance();
         // [START customize_button]
 
     }
@@ -200,6 +203,7 @@ public class LoginSocial extends AppCompatActivity {
         }
     }
     private void updateUI(@Nullable GoogleSignInAccount account) {
+
         if (account != null) {
             Toast.makeText(this,account.getDisplayName(),Toast.LENGTH_LONG).show();
             String id=account.getId();

@@ -1,27 +1,43 @@
 {
   "project_info": {
-    "project_number": "120819857986",
-    "firebase_url": "https://siete-202300.firebaseio.com",
-    "project_id": "siete-202300",
-    "storage_bucket": "siete-202300.appspot.com"
+    "project_number": "948641406348",
+    "firebase_url": "https://siete-1544167931762.firebaseio.com",
+    "project_id": "siete-1544167931762",
+    "storage_bucket": "siete-1544167931762.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:120819857986:android:79a5416aca19e933",
+        "mobilesdk_app_id": "1:948641406348:android:900a82a6b5258d81",
         "android_client_info": {
           "package_name": "com.ricardopazdemiquel.moviles"
         }
       },
       "oauth_client": [
         {
-          "client_id": "120819857986-hdf0vglrh63k41c5vpkklh05pk7jfibj.apps.googleusercontent.com",
+          "client_id": "948641406348-rpqigqktqf7dhr9f1s7it32kktat8bh7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ricardopazdemiquel.moviles",
+            "certificate_hash": "7af5aa43c87ff72d78467bd7f5481f409f5846f5"
+          }
+        },
+        {
+          "client_id": "948641406348-miren4ct1gib38o6svkjj9lcmu4lduvg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ricardopazdemiquel.moviles",
+            "certificate_hash": "48f3cd94e2e1cb80cbf3452a78adfa624e8042aa"
+          }
+        },
+        {
+          "client_id": "948641406348-3mv2u8qhcdn019u0jsscdqs0kp0d8afj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6tfGQ-HajXcnF31Fauj7fP2994wyC81Q"
+          "current_key": "AIzaSyDVVCp6HC13V-6uSnQM1FNMpwXY2JScKNE"
         }
       ],
       "services": {
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948641406348-3mv2u8qhcdn019u0jsscdqs0kp0d8afj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
