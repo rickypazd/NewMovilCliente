@@ -38,6 +38,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -223,6 +224,20 @@ public class LoginSocial extends AppCompatActivity {
                                 SharedPreferences.Editor editor = preferencias.edit();
                                 editor.putString("usr_log", obj.toString());
                                 editor.commit();
+
+                                SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor2 = preferencias2.edit();
+                                JSONArray arrayAe =new JSONArray();
+                                JSONObject objAe = new JSONObject();
+                                objAe.put("nombre_favorito" , "Aeropuerto");
+                                Double lat = -17.6481;
+                                Double lng = -63.1404;
+                                objAe.put("latFin" , lat);
+                                objAe.put("lngFin" , lng);
+                                arrayAe.put(objAe);
+                                editor2.putString("lista_favoritos", arrayAe.toString());
+                                editor2.commit();
+
                                 Intent intent = new Intent(LoginSocial.this,MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
@@ -294,6 +309,20 @@ public class LoginSocial extends AppCompatActivity {
                                                         SharedPreferences.Editor editor = preferencias.edit();
                                                         editor.putString("usr_log", obj.toString());
                                                         editor.commit();
+
+                                                        SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                                                        SharedPreferences.Editor editor2 = preferencias2.edit();
+                                                        JSONArray arrayAe =new JSONArray();
+                                                        JSONObject objAe = new JSONObject();
+                                                        objAe.put("nombre_favorito" , "Aeropuerto");
+                                                        Double lat = -17.6481;
+                                                        Double lng = -63.1404;
+                                                        objAe.put("latFin" , lat);
+                                                        objAe.put("lngFin" , lng);
+                                                        arrayAe.put(objAe);
+                                                        editor2.putString("lista_favoritos", arrayAe.toString());
+                                                        editor2.commit();
+
                                                         Intent intent = new Intent(LoginSocial.this,MainActivity.class);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);
