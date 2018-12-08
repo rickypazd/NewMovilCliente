@@ -29,14 +29,14 @@ import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
 
-public class Editar_perfil_Activity extends AppCompatActivity implements View.OnClickListener{
+public class Editar_perfil_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG ="fragment_explorar";
-    private static final String NOMBRE_USUARIO ="nombre_usuario";
-    private static final String APELLIDO_USUARIO ="apellido_usuario";
-    private static final String TELEFONO_USUARIO ="telefono_usuario";
-    private static final String CORREO_USUARIO ="correo_usuario";
-    private static final String CONTRASEÑA_USUARIO ="contraseña_usuario";
+    private static final String TAG = "fragment_explorar";
+    private static final String NOMBRE_USUARIO = "nombre_usuario";
+    private static final String APELLIDO_USUARIO = "apellido_usuario";
+    private static final String TELEFONO_USUARIO = "telefono_usuario";
+    private static final String CORREO_USUARIO = "correo_usuario";
+    private static final String CONTRASEÑA_USUARIO = "contraseña_usuario";
 
     private TextView textNombre;
     private TextView text_titulo;
@@ -57,14 +57,14 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
 
         textNombre = findViewById(R.id.text_nombreCliente);
         text_titulo = findViewById(R.id.text_titulo);
-        btn_guardar  = findViewById(R.id.btn_guardar);
+        btn_guardar = findViewById(R.id.btn_guardar);
         text_apellido_ma = findViewById(R.id.text_apellido_ma);
         Liner_apellido = findViewById(R.id.Liner_apellido);
         btn_guardar.setOnClickListener(this);
 
-        Intent intent= getIntent();
+        Intent intent = getIntent();
         tipo = intent.getStringExtra("tipo");
-        switch (tipo){
+        switch (tipo) {
             case NOMBRE_USUARIO:
                 String nombre = intent.getStringExtra("nombre");
                 textNombre.setText(nombre);
@@ -74,7 +74,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 String apellido_ma = intent.getStringExtra("apellido_ma");
                 text_titulo.setText("Apellido paterno");
                 Liner_apellido.setVisibility(View.VISIBLE);
-                textNombre.setText(apellido_pa +" "+ apellido_ma);
+                textNombre.setText(apellido_pa + " " + apellido_ma);
                 break;
             case TELEFONO_USUARIO:
                 String telefono = intent.getStringExtra("telefono");
@@ -106,6 +106,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     public void onBackPressed() {
         finish();
@@ -130,10 +131,10 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_guardar:
                 isValue();
-            break;
+                break;
         }
     }
 
@@ -171,7 +172,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                         String nombre = usr_log.getString("nombre");
                         String telefono = usr_log.getString("telefono");
                         String correo = usr_log.getString("correo");
-                        new edit_perfil_usuario(id, nombre, text_usuario, apellido_materno , telefono, correo).execute();
+                        new edit_perfil_usuario(id, nombre, text_usuario, apellido_materno, telefono, correo).execute();
                         break;
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -199,7 +200,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                         String apellido_pa = usr_log.getString("apellido_pa");
                         String apellido_ma = usr_log.getString("apellido_ma");
                         String telefono = usr_log.getString("telefono");
-                        new edit_perfil_usuario(id , nombre, apellido_pa, apellido_ma, telefono, text_usuario).execute();
+                        new edit_perfil_usuario(id, nombre, apellido_pa, apellido_ma, telefono, text_usuario).execute();
                         break;
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -232,7 +233,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         private String telefono;
         private String correo;
 
-        edit_perfil_usuario(String id_usr , String nombre,String apellido_pa,String apellido_ma, String telefono, String correo) {
+        edit_perfil_usuario(String id_usr, String nombre, String apellido_pa, String apellido_ma, String telefono, String correo) {
             this.id = id_usr;
             this.nombre = nombre;
             this.apellido_pa = apellido_pa;
@@ -255,13 +256,13 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "editar_perfil_cliente");
-            parametros.put("id_usuario",id);
-            parametros.put("nombre",nombre);
-            parametros.put("apellido_pa",apellido_pa);
-            parametros.put("apellido_ma",apellido_ma);
-            parametros.put("telefono",telefono);
-            parametros.put("correo",correo);
-            String respuesta ="";
+            parametros.put("id_usuario", id);
+            parametros.put("nombre", nombre);
+            parametros.put("apellido_pa", apellido_pa);
+            parametros.put("apellido_ma", apellido_ma);
+            parametros.put("telefono", telefono);
+            parametros.put("correo", correo);
+            String respuesta = "";
             try {
                 respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, parametros));
             } catch (Exception ex) {
@@ -269,28 +270,24 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
             }
             return respuesta;
         }
+
         @Override
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if(success == null) {
-                Toast.makeText(Editar_perfil_Activity.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+            if (success == null) {
+                Toast.makeText(Editar_perfil_Activity.this, "Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-            }else if (!success.isEmpty()){
-                try {
-                    JSONObject usr = new JSONObject(success);
-                    if(usr.getString("exito").equals("si")){
-                        finish();
-                    }else{
-                        return;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                Toast.makeText(Editar_perfil_Activity.this,"Error al obtener Datos.", Toast.LENGTH_SHORT).show();
+            } else if (success.isEmpty()) {
+
+            } else if (success.contains("exito")) {
+                finish();
+
+            } else {
+                Toast.makeText(Editar_perfil_Activity.this, "Error al obtener Datos.", Toast.LENGTH_SHORT).show();
             }
         }
+
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
@@ -309,7 +306,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         private String telefono;
         private String correo;
 
-        edit_contraseña(String id_usr , String nombre,String apellido_pa,String apellido_ma, String telefono, String correo) {
+        edit_contraseña(String id_usr, String nombre, String apellido_pa, String apellido_ma, String telefono, String correo) {
             this.id = id_usr;
             this.nombre = nombre;
             this.apellido_pa = apellido_pa;
@@ -332,13 +329,13 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "fdgdfgdf");
-            parametros.put("id_usuario",id);
-            parametros.put("nombre",nombre);
-            parametros.put("apellido_pa",apellido_pa);
-            parametros.put("apellido_ma",apellido_ma);
-            parametros.put("telefono",telefono);
-            parametros.put("correo",correo);
-            String respuesta ="";
+            parametros.put("id_usuario", id);
+            parametros.put("nombre", nombre);
+            parametros.put("apellido_pa", apellido_pa);
+            parametros.put("apellido_ma", apellido_ma);
+            parametros.put("telefono", telefono);
+            parametros.put("correo", correo);
+            String respuesta = "";
             try {
                 respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, parametros));
             } catch (Exception ex) {
@@ -346,16 +343,17 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
             }
             return respuesta;
         }
+
         @Override
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (success != null || !success.isEmpty()){
+            if (success != null || !success.isEmpty()) {
                 try {
                     JSONObject usr = new JSONObject(success);
-                    if(usr.getString("exito").equals("si")){
+                    if (usr.getString("exito").equals("si")) {
                         finish();
-                    }else{
+                    } else {
                         return;
                     }
                 } catch (JSONException e) {
@@ -363,6 +361,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 }
             }
         }
+
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
