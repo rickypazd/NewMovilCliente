@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.ricardopazdemiquel.moviles.R;
 import com.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
@@ -215,8 +216,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         text_direccion_togo.setOnFocusChangeListener(this);
         text_direccion_togo.setThreshold(3);
         text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
+        AutocompleteFilter auto= new AutocompleteFilter.Builder().setCountry("BO").build();
         mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
+                BOUNDS_MOUNTAIN_VIEW, auto);
         text_direccion_togo.setAdapter(mPlaceArrayAdapter);
 
         usr_log = getUsr_log();
