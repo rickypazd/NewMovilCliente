@@ -44,7 +44,6 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
     private TextView textcredito;
     private com.mikhaellopez.circularimageview.CircularImageView img_photo;
 
-
     private LinearLayout Liner_nombre;
     private LinearLayout Liner_apellido;
     private LinearLayout Liner_telefono;

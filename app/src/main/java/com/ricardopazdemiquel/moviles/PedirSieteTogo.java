@@ -84,11 +84,11 @@ import utiles.Contexto;
 import utiles.DirectionsJSONParser;
 import utiles.Token;
 
-public class PedirSieteTogo extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
+public class PedirSieteTogo extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     MapView mMapView;
     private GoogleMap googleMap;
-    private boolean entroLocation=false;
+    private boolean entroLocation = false;
     private static final String LOG_TAG = "MainActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView selected;
@@ -112,12 +112,12 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete togo y el tipo de carrera
-    private ImageView btn_pedir_togo ;
+    private ImageView btn_pedir_togo;
     private int tipo_carrera;
     private RadioButton radio_efectivo;
     private RadioButton radio_credito;
     // inicializamos los iconos de confirmar carrera
-    private TextView icono2 ;
+    private TextView icono2;
     double mont;
     private AutoCompleteTextView text_direccion_togo;
     private ImageView btn_agregar_producto;
@@ -138,17 +138,17 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         setTitle("Siete TO GO");
         toolbar.setTitleTextColor(Color.WHITE);
 
-        lista_productos=findViewById(R.id.lista_productos);
-        tv_cantidad=findViewById(R.id.tv_cantidad);
+        lista_productos = findViewById(R.id.lista_productos);
+        tv_cantidad = findViewById(R.id.tv_cantidad);
         linearLayoutTogo = findViewById(R.id.linearLayoutTogo);
-        layoutButon=findViewById(R.id.ll_boton);
-        iv_marker=findViewById(R.id.ivmarker);
+        layoutButon = findViewById(R.id.ll_boton);
+        iv_marker = findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
         btn_agregar_producto.setOnClickListener(this);
-        View view =findViewById(R.id.bottom_sheet);
-        bottomSheetBehavior= BottomSheetBehavior.from(view);
+        View view = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
         /*bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -170,12 +170,12 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         lista_productos.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (bottomSheetBehavior instanceof BehaviorCuston) {
                         ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
 
                     }
-                }else if(event.getAction()==MotionEvent.ACTION_UP){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (bottomSheetBehavior instanceof BehaviorCuston) {
                         ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
                     }
@@ -185,10 +185,10 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
-        final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
+        final double longitudeGPS = getIntent().getDoubleExtra("lng", 0);
+        final double latitudeGPS = getIntent().getDoubleExtra("lat", 0);
 
-        tipo_carrera = getIntent().getIntExtra("tipo",0);
+        tipo_carrera = getIntent().getIntExtra("tipo", 0);
 
         mGoogleApiClient = new GoogleApiClient.Builder(PedirSieteTogo.this)
                 .addApi(Places.GEO_DATA_API)
@@ -205,7 +205,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         icono2 = findViewById(R.id.icono2);
         btn_pedir_togo.setOnClickListener(this);
 
-        linear_confirm=findViewById(R.id.linear_confirm);
+        linear_confirm = findViewById(R.id.linear_confirm);
 
         mostar_button(tipo_carrera);
 
@@ -227,13 +227,13 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
 
         JSONArray arr = getProductosPendientes();
-        if(arr!=null){
-            adapter = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+        if (arr != null) {
+            adapter = new Adapter_pedidos_togo(PedirSieteTogo.this, arr);
             lista_productos.setAdapter(adapter);
-            tv_cantidad.setText("Productos ("+arr.length()+")");
+            tv_cantidad.setText("Productos (" + arr.length() + ")");
         }
 
-        btn_confirmar= findViewById(R.id.btn_confirmar);
+        btn_confirmar = findViewById(R.id.btn_confirmar);
         btn_confirmar.setOnClickListener(this);
 
         mMapView = findViewById(R.id.mapviewPedirSiete);
@@ -256,8 +256,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
                     public void onMyLocationChange(Location location) {
-                        if (!entroLocation){
-                            entroLocation=true;
+                        if (!entroLocation) {
+                            entroLocation = true;
                             CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14);
                             googleMap.animateCamera(cu);
                         }
@@ -273,8 +273,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                             mMap.clear();
                             if (text_direccion_togo.getTag() != null) {
                                 LatLng latlng2 = (LatLng) text_direccion_togo.getTag();
-                                fin=latlng2;
-                               // googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                                fin = latlng2;
+                                // googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
                             }
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
 
@@ -299,7 +299,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.
                         INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 return true;
@@ -359,7 +359,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 //Intent intent =  new Intent(PedirSieteTogo.this, Producto_togo_Activity.class);
                 //startActivity(intent);
                 android.app.FragmentManager fragmentManager = getFragmentManager();
-                new Producto_togo_Dialog(new JSONObject() , 0 , 2).show(fragmentManager, "Dialog");
+                new Producto_togo_Dialog(new JSONObject(), 0, 2).show(fragmentManager, "Dialog");
                 break;
             case R.id.btn_confirmar:
                 Confimar_viaje();
@@ -367,58 +367,56 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void InsertList(JSONObject object){
+    public void InsertList(JSONObject object) {
         JSONArray arr = getProductosPendientes();
-        if(arr==null){
-            arr= new JSONArray();
+        if (arr == null) {
+            arr = new JSONArray();
         }
         arr.put(object);
-        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("productos_pendientes", arr.toString());
         editor.commit();
-        Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+        Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this, arr);
         lista_productos.setAdapter(adapters);
-        tv_cantidad.setText("Productos ("+arr.length()+")");
+        tv_cantidad.setText("Productos (" + arr.length() + ")");
 
     }
 
-    public void UpdateList(JSONObject object , int pos) throws JSONException {
+    public void UpdateList(JSONObject object, int pos) throws JSONException {
         JSONArray arr = getProductosPendientes();
-        if(arr==null){
-            arr= new JSONArray();
-        }else{
-            arr.put(pos,object);
-            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        if (arr == null) {
+            arr = new JSONArray();
+        } else {
+            arr.put(pos, object);
+            SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencias.edit();
             editor.putString("productos_pendientes", arr.toString());
             editor.commit();
-            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this, arr);
             lista_productos.setAdapter(adapters);
-            tv_cantidad.setText("Productos ("+arr.length()+")");
+            tv_cantidad.setText("Productos (" + arr.length() + ")");
         }
 
     }
 
-    public void removeItem(int pos){
+    public void removeItem(int pos) {
 
         JSONArray arr = getProductosPendientes();
-        if(arr==null){
-            arr= new JSONArray();
-        }else{
+        if (arr == null) {
+            arr = new JSONArray();
+        } else {
             arr.remove(pos);
-            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+            SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencias.edit();
             editor.putString("productos_pendientes", arr.toString());
             editor.commit();
-            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this, arr);
             lista_productos.setAdapter(adapters);
-            tv_cantidad.setText("Productos ("+arr.length()+")");
+            tv_cantidad.setText("Productos (" + arr.length() + ")");
         }
 
     }
-
-
 
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
@@ -462,9 +460,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 Address returnedAddress = addresses.get(0);
                 //StringBuilder strReturnedAddress = new StringBuilder("");
 
-                strAdd=returnedAddress.getThoroughfare();
-                if(strAdd==null )
-                strAdd=returnedAddress.getFeatureName();
+                strAdd = returnedAddress.getThoroughfare();
+                if (strAdd == null)
+                    strAdd = returnedAddress.getFeatureName();
 
                 //  Log.w("My Current loction addr", strReturnedAddress.toString());
             } else {
@@ -476,27 +474,28 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
         return strAdd;
     }
+
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if(hasFocus){
-            selected=(AutoCompleteTextView) v;
+        if (hasFocus) {
+            selected = (AutoCompleteTextView) v;
 
         }
     }
 
-    private String obtenerDireccionesURL(LatLng origin,LatLng dest){
+    private String obtenerDireccionesURL(LatLng origin, LatLng dest) {
 
-        String str_origin = "origin="+origin.latitude+","+origin.longitude;
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
-        String key = "key="+getString(R.string.apikey);
+        String key = "key=" + getString(R.string.apikey);
 
-        String parameters = str_origin+"&"+str_dest;
+        String parameters = str_origin + "&" + str_dest;
 
         String output = "json";
 
-        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&"+key;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&" + key;
 
         return url;
     }
@@ -543,10 +542,10 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
             String data = "";
 
-            try{
+            try {
                 data = downloadUrl(url[0]);
-            }catch(Exception e){
-                Log.d("ERROR AL OBTENER INFO D",e.toString());
+            } catch (Exception e) {
+                Log.d("ERROR AL OBTENER INFO D", e.toString());
             }
             return data;
         }
@@ -561,7 +560,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
@@ -569,12 +568,12 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             JSONObject jObject;
             List<List<HashMap<String, String>>> routes = null;
 
-            try{
+            try {
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
 
                 routes = parser.parse(jObject);
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return routes;
@@ -586,14 +585,14 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             PolylineOptions lineOptions = null;
             MarkerOptions markerOptions = new MarkerOptions();
 
-            for(int i=0;i<result.size();i++){
+            for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
 
                 List<HashMap<String, String>> path = result.get(i);
 
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
@@ -604,41 +603,41 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
                 lineOptions.addAll(points);
                 lineOptions.width(8);
-                lineOptions.color(Color.rgb(0,0,255));
+                lineOptions.color(Color.rgb(0, 0, 255));
             }
-            if(lineOptions!=null) {
+            if (lineOptions != null) {
                 googleMap.addPolyline(lineOptions);
 
                 int size = points.size() - 1;
                 float[] results = new float[1];
                 float sum = 0;
 
-                for(int i = 0; i < size; i++){
+                for (int i = 0; i < size; i++) {
                     Location.distanceBetween(
                             points.get(i).latitude,
                             points.get(i).longitude,
-                            points.get(i+1).latitude,
-                            points.get(i+1).longitude,
+                            points.get(i + 1).latitude,
+                            points.get(i + 1).longitude,
                             results);
                     sum += results[0];
                 }
 
                 try {
                     String resp = new validar_precio(tipo_carrera).execute().get();
-                    if(resp==null){
-                        Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-                    }else{
+                    if (resp == null) {
+                        Toast.makeText(PedirSieteTogo.this, "Error al conectarse con el servidor.", Toast.LENGTH_SHORT).show();
+                    } else {
                         JSONObject object = new JSONObject(resp);
-                        if(object != null){
+                        if (object != null) {
                             double costo_metro = object.getDouble("costo_metro");
                             double costo_minuto = object.getDouble("costo_minuto");
                             double costo_basico = object.getDouble("costo_basico");
-                            mont = costo_basico + (costo_metro * sum ) + ((sum/500)*costo_minuto);
-                        }else {
+                            mont = costo_basico + (costo_metro * sum) + ((sum / 500) * costo_minuto);
+                        } else {
                             return;
                         }
                         int montoaux = (int) mont;
-                        monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                        monto.setText("Monto aproximado: " + (montoaux - 2) + " - " + (montoaux + 2));
                     }
 
                 } catch (InterruptedException e) {
@@ -650,9 +649,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 }
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 builder.include(points.get(0));
-                builder.include(points.get(points.size()-1));
-                LatLngBounds bounds=builder.build();
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
+                builder.include(points.get(points.size() - 1));
+                LatLngBounds bounds = builder.build();
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                 googleMap.moveCamera(cu);
                 //sum = metros
             }
@@ -663,7 +662,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try{
+        try {
             URL url = new URL(strUrl);
 
             // Creamos una conexion http
@@ -680,7 +679,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             StringBuffer sb = new StringBuffer();
 
             String line = "";
-            while( ( line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
 
@@ -688,9 +687,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
             br.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.d("Exception", e.toString());
-        }finally{
+        } finally {
             iStream.close();
             urlConnection.disconnect();
         }
@@ -698,7 +697,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     }
 
     private void mostar_button(int tipo) {
-            switch (tipo) {
+        switch (tipo) {
             case 2:
                 btn_pedir_togo.setVisibility(View.VISIBLE);
                 cargartogo();
@@ -710,40 +709,39 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     private void Confimar_viaje() {
         try {
             String id = usr_log.getString("id");
-            String resp =new User_getPerfil(id).execute().get();
-            if(text_direccion_togo.getText().toString().length() != 0){
-            if(resp==null){
-                Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-            }else{
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                if (!resp.isEmpty()){
-                    JSONObject usr = new JSONObject(resp);
-                    if(usr.getString("exito").equals("si")){
-                        double credito = usr.getDouble("creditos");
-                        boolean acept = true;
-                        if(radio_credito.isChecked() == true){
-                            tipo_pago=2;
-                            if(credito < mont){
-                                new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
-                                acept=false;
+            String resp = new User_getPerfil(id).execute().get();
+            if (text_direccion_togo.getText().toString().length() != 0) {
+                if (resp == null) {
+                    Toast.makeText(PedirSieteTogo.this, "Error al conectarse con el servidor.", Toast.LENGTH_SHORT).show();
+                } else {
+                    android.app.FragmentManager fragmentManager = getFragmentManager();
+                    if (!resp.isEmpty()) {
+                        JSONObject usr = new JSONObject(resp);
+                        if (usr.getString("exito").equals("si")) {
+                            double credito = usr.getDouble("creditos");
+                            boolean acept = true;
+                            if (radio_credito.isChecked() == true) {
+                                tipo_pago = 2;
+                                if (credito < mont) {
+                                    new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
+                                    acept = false;
+                                }
+                            } else {
+                                tipo_pago = 1;
+                                if (credito < 0) {
+                                    new Confirmar_viaje_Dialog(tipo_carrera, credito).show(fragmentManager, "Dialog");
+                                    //esta en deuda , aler se cobrara el monto + viej
+                                    acept = false;
+                                }
                             }
-                        }
-                        else {
-                            tipo_pago=1;
-                            if(credito < 0){
-                                new Confirmar_viaje_Dialog(tipo_carrera,credito).show(fragmentManager, "Dialog");
-                                //esta en deuda , aler se cobrara el monto + viej
-                                acept=false;
+                            if (acept) {
+                                ok_pedir_viaje();
                             }
-                        }
-                        if(acept){
-                            ok_pedir_viaje();
                         }
                     }
                 }
-            }
-            }else{
-                Toast.makeText(PedirSieteTogo.this,"Selecciona una ubicación válida.",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(PedirSieteTogo.this, "Selecciona una ubicación válida.", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -754,12 +752,12 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void cargartogo(){
+    private void cargartogo() {
         JSONArray arr = getProductosPendientes();
-        if(arr!=null){
-            Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+        if (arr != null) {
+            Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(PedirSieteTogo.this, arr);
             lista_productos.setAdapter(adapter);
-            tv_cantidad.setText("Productos ("+arr.length()+")");
+            tv_cantidad.setText("Productos (" + arr.length() + ")");
         }
     }
 
@@ -793,8 +791,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }*/
 
-    private void mostraConfirmar(int valor){
-        switch (valor){
+    private void mostraConfirmar(int valor) {
+        switch (valor) {
             case 2:
                 layoutButon.setVisibility(View.VISIBLE);
                 break;
@@ -804,12 +802,13 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
     public class validar_precio extends AsyncTask<Void, String, String> {
         private int id;
-        public validar_precio(int id ){
-            this.id=id;
+
+        public validar_precio(int id) {
+            this.id = id;
         }
+
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
@@ -817,10 +816,11 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_costo");
-            parametros.put("id",id+"");
+            parametros.put("id", id + "");
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, parametros));
             return respuesta;
         }
+
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
@@ -831,6 +831,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     public class User_getPerfil extends AsyncTask<Void, String, String> {
 
         private final String id;
+
         User_getPerfil(String id_usr) {
             id = id_usr;
         }
@@ -839,8 +840,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_usuario");
-            parametros.put("id",id);
-            String respuesta ="";
+            parametros.put("id", id);
+            String respuesta = "";
             try {
                 respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
             } catch (Exception ex) {
@@ -848,16 +849,17 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             }
             return respuesta;
         }
+
         @Override
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
-            if(success==null){
-                Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-            }else{
-                if (!success.isEmpty()){
+            if (success == null) {
+                Toast.makeText(PedirSieteTogo.this, "Error al conectarse con el servidor.", Toast.LENGTH_SHORT).show();
+            } else {
+                if (!success.isEmpty()) {
                     try {
                         JSONObject usr = new JSONObject(success);
-                        if(usr.getString("exito").equals("si")) {
+                        if (usr.getString("exito").equals("si")) {
                             SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferencias.edit();
                             editor.putString("usr_log", usr.toString());
