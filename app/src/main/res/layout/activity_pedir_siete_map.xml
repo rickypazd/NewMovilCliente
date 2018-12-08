@@ -63,8 +63,9 @@
             <ImageView
                 android:id="@+id/ivmarker"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
                 app:srcCompat="@drawable/ic_icono_market" />
 
             <android.support.constraint.ConstraintLayout
