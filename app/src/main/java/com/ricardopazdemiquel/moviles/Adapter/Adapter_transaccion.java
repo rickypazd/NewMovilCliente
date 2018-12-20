@@ -70,7 +70,7 @@ public class  Adapter_transaccion extends BaseAdapter {
             String id_carrera = trans.getString("id_carrera");
 
             text_fecha.setText(fecha.substring(0,16));
-            text_cantidad.setText(cantidad);
+            text_cantidad.setText("Bs "+cantidad);
             text_tipo.setText(tipo_nombre);
 
         } catch (JSONException e) {
