@@ -132,19 +132,19 @@ public class List_historial_fragment extends Fragment {
             }
         }
 
-        private ProgressDialog progreso;
+        //private ProgressDialog progreso;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progreso = new ProgressDialog(getActivity());
+            /*progreso = new ProgressDialog(getActivity());
             progreso.setIndeterminate(true);
             progreso.setTitle("Esperando Respuesta");
             progreso.setCancelable(false);
-            progreso.show();
+            progreso.show();*/
         }
         @Override
         protected String doInBackground(Void... params) {
-            publishProgress("por favor espere...");
+           // publishProgress("por favor espere...");
             Hashtable<String,String> param = new Hashtable<>();
             param.put("evento","get_historial_ubic");
             param.put("id", id_usr);
@@ -159,7 +159,7 @@ public class List_historial_fragment extends Fragment {
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
-            progreso.dismiss();
+            //progreso.dismiss();
             if(resp == null){
                 Toast.makeText(getActivity(),"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
@@ -175,11 +175,11 @@ public class List_historial_fragment extends Fragment {
                 }
             }
         }
-        @Override
+       /* @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             progreso.setMessage(values[0]);
-        }
+        }*/
     }
 
 }

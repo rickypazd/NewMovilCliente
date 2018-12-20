@@ -166,8 +166,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          }
 
     private void seleccionarFragmento(String fragmento) {
-        Fragment fragmentoGenerico = null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.app.Fragment fragmentoGenerico = null;
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        android.app.FragmentManager fragmentManager = getFragmentManager();
         Object obj = -1;
         switch (fragmento) {
             case "Mapa":

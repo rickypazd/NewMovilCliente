@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center|start"
-                    android:text="pollo kiky a la brasa"
+                    android:text=""
                     android:textColor="@color/colorGris"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="5 cant."
+                    android:text=""
                     android:textColor="@color/colorGris"
                     android:textSize="15sp" />
 

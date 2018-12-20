@@ -3,15 +3,16 @@ package com.ricardopazdemiquel.moviles;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.ricardopazdemiquel.moviles.Dialog.Info_Viajes_Dialog;
 import com.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONException;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Elejir_tipo_siete extends Fragment implements View.OnClickListener {
+public class Elejir_tipo_siete extends android.app.Fragment implements View.OnClickListener {
 
     private Button siete;
     private Button siete_maravilla;
@@ -27,19 +28,32 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
     private Button siete_togo;
     private Activity activity;
     double longitudeGPS, latitudeGPS;
-
+    private ImageView inf_siete_estandar;
+    private ImageView inf_super_siete;
+    private ImageView inf_siete_maravilla;
+    private ImageView inf_siete_togo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_elejir_tipo_siete, container, false);
 
-        longitudeGPS = getActivity().getIntent().getDoubleExtra("lng",0);
-        latitudeGPS = getActivity().getIntent().getDoubleExtra("lat",0);
+        longitudeGPS = getActivity().getIntent().getDoubleExtra("lng", 0);
+        latitudeGPS = getActivity().getIntent().getDoubleExtra("lat", 0);
 
         siete = view.findViewById(R.id.btn_siete);
         siete_maravilla = view.findViewById(R.id.btn_sieteMaravilla);
         siete_super = view.findViewById(R.id.btn_superSiete);
         siete_togo = view.findViewById(R.id.btn_togo);
+
+        inf_siete_estandar = view.findViewById(R.id.inf_siete_estandar);
+        inf_super_siete = view.findViewById(R.id.inf_super_siete);
+        inf_siete_maravilla = view.findViewById(R.id.inf_siete_maravilla);
+        inf_siete_togo = view.findViewById(R.id.inf_siete_togo);
+
+        inf_siete_estandar.setOnClickListener(this);
+        inf_super_siete.setOnClickListener(this);
+        inf_siete_maravilla.setOnClickListener(this);
+        inf_siete_togo.setOnClickListener(this);
 
         siete.setOnClickListener(this);
         siete_maravilla.setOnClickListener(this);
@@ -48,6 +62,9 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
 
         return view;
     }
+
+    //android.app.FragmentManager fragmentManager = getFragmentManager();
+    //      new Aeropuerto_viaje_Dialog().show(fragmentManager, "Dialog");
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,30 +89,30 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_siete:
-                    Intent intent = new Intent(getActivity(), PedirSieteMap.class);
-                    intent.putExtra("lng", longitudeGPS);
-                    intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 1);
-                    startActivity(intent);
+                Intent intent = new Intent(getActivity(), PedirSieteMap.class);
+                intent.putExtra("lng", longitudeGPS);
+                intent.putExtra("lat", latitudeGPS);
+                intent.putExtra("tipo", 1);
+                startActivity(intent);
                 break;
             case R.id.btn_superSiete:
                 Intent intent1 = new Intent(getActivity(), PedirSieteMap.class);
-                    intent1.putExtra("lng", longitudeGPS);
-                    intent1.putExtra("lat", latitudeGPS);
-                    intent1.putExtra("tipo", 4);
-                    startActivity(intent1);
+                intent1.putExtra("lng", longitudeGPS);
+                intent1.putExtra("lat", latitudeGPS);
+                intent1.putExtra("tipo", 4);
+                startActivity(intent1);
                 break;
             case R.id.btn_sieteMaravilla:
                 JSONObject obj = getUsr_log();
                 try {
-                    if(obj.getString("sexo").equals("Mujer")){
+                    if (obj.getString("sexo").equals("Mujer")) {
                         Intent intent2 = new Intent(getActivity(), PedirSieteMap.class);
                         intent2.putExtra("lng", longitudeGPS);
                         intent2.putExtra("lat", latitudeGPS);
                         intent2.putExtra("tipo", 3);
                         startActivity(intent2);
-                    }else{
-                        Toast.makeText(getActivity(),"Usted no puede tener esta opción.",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Usted no puede tener esta opción.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -103,11 +120,29 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btn_togo:
                 Intent intent_togo = new Intent(getActivity(), PedirSieteTogo.class);
-                    intent_togo.putExtra("lng", longitudeGPS);
-                    intent_togo.putExtra("lat", latitudeGPS);
-                    intent_togo.putExtra("tipo", 2);
-                    startActivity(intent_togo);
+                intent_togo.putExtra("lng", longitudeGPS);
+                intent_togo.putExtra("lat", latitudeGPS);
+                intent_togo.putExtra("tipo", 2);
+                startActivity(intent_togo);
                 break;
+
+            case R.id.inf_siete_estandar:
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                new Info_Viajes_Dialog(1).show(fragmentManager, "Dialog");
+                break;
+            case R.id.inf_super_siete:
+                android.app.FragmentManager fragmentManager2 = getFragmentManager();
+                new Info_Viajes_Dialog(2).show(fragmentManager2, "Dialog");
+                break;
+            case R.id.inf_siete_maravilla:
+                android.app.FragmentManager fragmentManager3 = getFragmentManager();
+                new Info_Viajes_Dialog(3).show(fragmentManager3, "Dialog");
+                break;
+            case R.id.inf_siete_togo:
+                android.app.FragmentManager fragmentManager4 = getFragmentManager();
+                new Info_Viajes_Dialog(4).show(fragmentManager4, "Dialog");
+                break;
+
         }
     }
 
