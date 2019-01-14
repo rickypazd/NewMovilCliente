@@ -73,7 +73,7 @@ public class Info_Viajes_Dialog extends DialogFragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancelar:
-                ((EsperandoConductor) getActivity()).confirmar();
+
                 dismiss();
                 break;
             case R.id.btn_confirmar_cancelacion:
@@ -86,16 +86,16 @@ public class Info_Viajes_Dialog extends DialogFragment implements View.OnClickLi
     private void Informacion_siete() {
         switch (tipo_siete) {
             case SIETE_ESTANDAR:
-                text_mesaje.setText("sdafsdf");
+                text_mesaje.setText("7 viajes rápidos y econimicos, donde podras realiazar pedidos de nuestras diferentes categorias: viaje estandar, camionetas, 4x4 , vehiculos de 3 filas.");
                 break;
             case SUPER_SIETE:
-                text_mesaje.setText("Se te cobrará Bs. ds");
+                text_mesaje.setText("Conductor designado, ustedes preocupense de la diversión super siete se encarga de lo demas.");
                 break;
             case SIETE_MARAVILLA:
-                text_mesaje.setText("Se te cobrará BsSdfdf");
+                text_mesaje.setText("Siete maravilla , estar juntas y seguras es una maravilla, una chofer altamente capacitada sera responsable de llevarte a tu destino.");
                 break;
             case SIETE_TOGO:
-                text_mesaje.setText("Se te cobrará Bsdsf");
+                text_mesaje.setText("Siete TO GO, delivery y encomiendas las 24 horas los 7 dias de la semana.");
                 break;
         }
     }
