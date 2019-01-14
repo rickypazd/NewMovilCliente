@@ -301,7 +301,7 @@ private Button btn_enviar_mensaje;
                 }
             };
         }
-        registerReceiver(broadcastReceiverConfirmoCompra,new IntentFilter("confirmo_compra"));
+        registerReceiver(broadcastReceiverConfirmoCompra,new IntentFilter("Confirmo_compra"));
 
     }
 
@@ -362,7 +362,7 @@ private Button btn_enviar_mensaje;
     }
 
     private void Confirmo_compra(Intent intenta){
-        btn_cancelar_viaje.setVisibility(View.GONE);
+        Container_cancelar.setVisibility(View.GONE);
     }
 
 

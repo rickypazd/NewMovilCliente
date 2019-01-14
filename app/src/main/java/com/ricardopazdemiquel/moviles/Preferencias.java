@@ -68,8 +68,19 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
                 String apellido_ma = usr_log.getString("apellido_ma");
                 text_nombre.setText(nombre);
                 text_apellidos.setText(apellido_pa+" "+apellido_ma);
-                if(usr_log.getString("foto_perfil").length()>0){
+                /*if(usr_log.getString("foto_perfil").length()>0){
                     new AsyncTaskLoadImage(img_photo).execute(getString(R.string.url_foto)+usr_log.getString("foto_perfil"));
+                }*/
+                if(usr_log.getString("id_face").length()>0){
+                    //cargar_img_face
+                    String id_face=usr_log.getString("id_face");
+                    String url="https://graph.facebook.com/" +id_face+"/picture?type=large";
+                    new AsyncTaskLoadImage(img_photo).execute(url);
+                }
+                if(usr_log.getString("id_gmail").length()>0){
+                    //cargar_img_gmail
+                    String url="https://pikmail.herokuapp.com/"+usr_log.getString("id_gmail")+"?size=100";
+                    new AsyncTaskLoadImage(img_photo).execute(url);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
