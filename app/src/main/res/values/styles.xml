@@ -13,6 +13,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
     </style>
 
+    <style name="AppThemethree" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+    </style>
+
     <style name="WindowAnimationStyle">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>

@@ -120,7 +120,7 @@
 
         <activity
             android:name="com.ricardopazdemiquel.moviles.PidiendoSiete"
-            android:theme="@style/AppThemeone"
+            android:theme="@style/AppThemethree"
             android:screenOrientation="portrait"/>
 
         <activity
